@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#060911">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Raider Game Hub 2027 &#8226; 100% Offline Air-Gapped</title>
+  <style>
+    /* =========================================================
+       RAIDER GAME HUB 2027 - NEXT-GEN CYBERPUNK GAMING INTERFACE
+       Optimizado para Pantalla Tactil 1280x800 &#8226; Android 4.4.2+
+       60 FPS Mandatorio &#8226; Zero Lag &#8226; 100% Offline Air-Gapped
+       ========================================================= */
+
+    :root {
+      --bg-core: #060911;
+      --bg-surface: #0B101E;
+      --bg-card: #0F172A;
+      --bg-card-hover: #16223B;
+      --border-dim: #1E293B;
+      --border-glow: rgba(0, 240, 255, 0.35);
+      
+      --neon-cyan: #00F0FF;
+      --neon-green: #00FF9D;
+      --neon-amber: #FFB800;
+      --neon-magenta: #FF0055;
+      --neon-purple: #A855F7;
+      --neon-blue: #3B82F6;
+      
+      --accent-main: var(--neon-cyan);
+      --accent-glow: rgba(0, 240, 255, 0.4);
+      --accent-grad: linear-gradient(135deg, #00F0FF 0%, #0091FF 100%);
+      
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+    }
+
+    body.theme-hyperdrive {
+      --accent-main: #FF0055;
+      --accent-glow: rgba(255, 0, 85, 0.45);
+      --accent-grad: linear-gradient(135deg, #FF0055 0%, #FF9900 100%);
+      --border-glow: rgba(255, 0, 85, 0.35);
+    }
+    body.theme-matrix {
+      --accent-main: #00FF9D;
+      --accent-glow: rgba(0, 255, 157, 0.45);
+      --accent-grad: linear-gradient(135deg, #00FF9D 0%, #059669 100%);
+      --border-glow: rgba(0, 255, 157, 0.35);
+    }
+    body.theme-retrowave {
+      --accent-main: #A855F7;
+      --accent-glow: rgba(168, 85, 247, 0.45);
+      --accent-grad: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+      --border-glow: rgba(168, 85, 247, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-core);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.05) 0%, transparent 40%),
+        linear-gradient(180deg, rgba(6, 9, 17, 0.98) 0%, #060911 100%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 75px;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #070B14; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-main); }
+
+    /* HUD SUPERIOR */
+    .top-nav {
+      background: rgba(11, 16, 30, 0.94);
+      border-bottom: 2px solid var(--accent-main);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 4px 25px var(--accent-glow);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo-box {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-grad);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .nav-titles { display: flex; flex-direction: column; }
+    .nav-title {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-title span {
+      color: var(--accent-main);
+      text-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .nav-version-pill {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--accent-main);
+      color: var(--accent-main);
+      font-size: 10px;
+      font-weight: 900;
+      padding: 1px 7px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+      margin-left: 6px;
+    }
+
+    .nav-telemetry {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 3px;
+    }
+
+    .hud-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #101726;
+      border: 1px solid #1E293B;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      color: #CBD5E1;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--neon-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--neon-green);
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hud-btn {
+      background: #111827;
+      border: 1px solid #24324D;
+      color: #F8FAFC;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .hud-btn:active {
+      transform: scale(0.94);
+      background: #1E293B;
+      border-color: var(--accent-main);
+    }
+
+    .btn-dice {
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.2) 0%, rgba(255, 110, 0, 0.2) 100%);
+      border-color: var(--neon-amber);
+      color: var(--neon-amber);
+    }
+
+    .btn-sfx.muted {
+      color: #64748B;
+      border-color: #334155;
+    }
+
+    .btn-exit {
+      background: #182234;
+      border-color: var(--accent-main);
+      color: var(--accent-main);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* MODAL CLOUD STORE */
+    .cloud-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 7, 14, 0.94);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .cloud-modal-overlay.active { display: flex; }
+    .cloud-modal-box {
+      background: #0B132B;
+      border: 2px solid var(--neon-cyan);
+      box-shadow: 0 0 35px var(--accent-glow);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .cloud-modal-head {
+      background: #0E1A3A;
+      border-bottom: 2px solid #1E293B;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cloud-modal-title {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #FFFFFF;
+    }
+    .cloud-modal-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .cloud-repo-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      background: #070B16;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #1E293B;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .cloud-repo-input {
+      flex: 1;
+      min-width: 240px;
+      background: #0E1628;
+      border: 1px solid #334155;
+      color: #F8FAFC;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-family: monospace;
+      outline: none;
+    }
+    .cloud-apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .cloud-app-card {
+      background: #0F172A;
+      border: 1.5px solid #1E293B;
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .cloud-app-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cloud-app-icon {
+      font-size: 32px;
+      width: 48px;
+      height: 48px;
+      background: #182236;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cloud-app-info { flex: 1; }
+    .cloud-app-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: #FFFFFF;
+    }
+    .cloud-app-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--neon-green);
+    }
+    .cloud-app-desc {
+      font-size: 11px;
+      color: #94A3B8;
+      line-height: 1.35;
+    }
+    .cloud-app-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #64748B;
+      font-weight: 800;
+    }
+    .btn-cloud-install {
+      background: linear-gradient(135deg, #00FF9D 0%, #059669 100%);
+      color: #04100B;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-cloud-install:active { transform: scale(0.96); }
+    .btn-cloud-install.installed {
+      background: #1E293B;
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
+    }
+    .btn-cloud-install.loading {
+      background: #334155;
+      color: #F8FAFC;
+    }
+
+    /* CONTENEDOR */
+    .hub-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 20px 0 20px;
+    }
+
+    /* HERO BANNER DESTACADO */
+    .hero-banner {
+      background: linear-gradient(135deg, #0B132B 0%, #151C33 50%, #0A0F1D 100%);
+      border: 1.5px solid var(--accent-main);
+      border-radius: 18px;
+      padding: 18px 24px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px var(--accent-glow);
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 65%;
+    }
+
+    .hero-spot-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--accent-main);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .hero-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #E2E8F0;
+    }
+
+    .hero-tag.perf {
+      background: rgba(0, 255, 157, 0.15);
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-hero-launch {
+      background: var(--accent-grad);
+      color: #060911;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      transition: all 0.15s ease;
+    }
+
+    .btn-hero-launch:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 25px var(--accent-main);
+    }
+
+    .btn-hero-next {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-hero-next:active {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(0.95);
+    }
+
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-badge-circle {
+      width: 88px;
+      height: 88px;
+      background: #111A2E;
+      border: 2px solid var(--accent-main);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+      box-shadow: 0 0 30px var(--accent-glow);
+      position: relative;
+    }
+
+    .hero-badge-halo {
+      position: absolute;
+      top: -8px; left: -8px; right: -8px; bottom: -8px;
+      border: 1px dashed var(--accent-main);
+      border-radius: 28px;
+      opacity: 0.5;
+      animation: rotate-halo 25s linear infinite;
+    }
+
+    @keyframes rotate-halo {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* BÚSQUEDA Y TEMAS */
+    .controls-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-icon-pos {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      margin-top: -10px;
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #0E1626;
+      border: 1.5px solid #1E293B;
+      color: #FFFFFF;
+      padding: 12px 42px 12px 46px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-main);
+      box-shadow: 0 0 16px var(--accent-glow);
+      background: #111B30;
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      margin-top: -11px;
+      width: 22px;
+      height: 22px;
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #94A3B8;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .search-clear-btn.visible { display: flex; }
+
+    .theme-picker-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0E1626;
+      border: 1px solid #1E293B;
+      padding: 6px 10px;
+      border-radius: 12px;
+    }
+
+    .theme-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.15s ease;
+    }
+    .theme-dot:active { transform: scale(1.2); }
+    .theme-dot.active { border-color: #FFFFFF; }
+    .td-cyber { background: #00F0FF; box-shadow: 0 0 8px #00F0FF; }
+    .td-hyper { background: #FF0055; box-shadow: 0 0 8px #FF0055; }
+    .td-matrix { background: #00FF9D; box-shadow: 0 0 8px #00FF9D; }
+    .td-retro { background: #A855F7; box-shadow: 0 0 8px #A855F7; }
+
+    /* FILTROS POR CONSOLA/CATEGORÍA */
+    .filter-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .filter-pill {
+      background: #0E1626;
+      border: 1px solid #1E293B;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .filter-pill:active { transform: scale(0.95); }
+    .filter-pill.active {
+      background: var(--accent-grad);
+      color: #060911;
+      border-color: var(--accent-main);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .pill-count {
+      background: rgba(0, 0, 0, 0.35);
+      color: inherit;
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    /* BARRA DE RESULTADOS */
+    .results-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .sort-select {
+      background: #0E1626;
+      border: 1px solid #1E293B;
+      color: #CBD5E1;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      outline: none;
+    }
+
+    /* GRILLA DE JUEGOS */
+    .games-grid {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -7px;
+    }
+
+    .game-col {
+      width: 50%;
+      padding: 7px;
+      box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+      .game-col { width: 33.333%; }
+    }
+    @media (min-width: 1080px) {
+      .game-col { width: 25%; }
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-dim);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .game-card:active {
+      transform: scale(0.96);
+      border-color: var(--accent-main);
+      background: var(--bg-card-hover);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .game-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent-grad);
+      opacity: 0.6;
+    }
+
+    .card-fav-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 26px;
+      height: 26px;
+      background: rgba(14, 22, 38, 0.85);
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #64748B;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .card-fav-btn.is-fav {
+      color: var(--neon-amber);
+      border-color: var(--neon-amber);
+      background: rgba(255, 184, 0, 0.15);
+      box-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-right: 28px;
+    }
+
+    .card-emblem {
+      width: 44px;
+      height: 44px;
+      background: #111A2E;
+      border: 1px solid #1E293B;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+    }
+
+    .card-meta {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .card-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #FFFFFF;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .card-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .card-badge {
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-pwa     { background: rgba(168, 85, 247, 0.2); color: #C084FC; border: 1px solid #A855F7; }
+    .badge-android { background: rgba(5, 150, 105, 0.2); color: #34D399; border: 1px solid #059669; }
+    .badge-arcade  { background: rgba(217, 119, 6, 0.2);  color: #FBBF24; border: 1px solid #D97706; }
+    .badge-snes    { background: rgba(234, 88, 12, 0.2);  color: #FB923C; border: 1px solid #EA580C; }
+    .badge-genesis { background: rgba(13, 148, 136, 0.2); color: #2DD4BF; border: 1px solid #0D9488; }
+    .badge-gba     { background: rgba(124, 58, 237, 0.2); color: #C084FC; border: 1px solid #7C3AED; }
+    .badge-gbc     { background: rgba(219, 39, 119, 0.2); color: #F472B6; border: 1px solid #DB2777; }
+    .badge-psx     { background: rgba(37, 99, 235, 0.2);  color: #60A5FA; border: 1px solid #2563EB; }
+
+    .fps-tag {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--neon-green);
+      background: rgba(0, 255, 157, 0.1);
+      border: 1px solid rgba(0, 255, 157, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .btn-play-trigger {
+      background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #38BDF8;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+    .game-card:active .btn-play-trigger {
+      background: var(--accent-grad);
+      color: #060911;
+      border-color: var(--accent-main);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    /* MODAL DE DESPEGUE */
+    .launch-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 7, 13, 0.94);
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .launch-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .launch-box {
+      background: #0B1120;
+      border: 2px solid var(--accent-main);
+      border-radius: 20px;
+      padding: 28px 36px;
+      text-align: center;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: 0 10px 40px var(--accent-glow);
+      transform: scale(0.92);
+      transition: transform 0.2s ease;
+    }
+    .launch-overlay.active .launch-box { transform: scale(1); }
+
+    .launch-hero-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 15px var(--accent-main));
+    }
+
+    .launch-game-title {
+      font-size: 21px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .launch-game-cat {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent-main);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+
+    .launch-meter {
+      width: 100%;
+      height: 8px;
+      background: #1E293B;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      border: 1px solid #334155;
+    }
+
+    .meter-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-grad);
+      box-shadow: 0 0 12px var(--accent-main);
+      transition: width 0.75s ease-out;
+    }
+
+    .launch-terminal {
+      background: #080D17;
+      border: 1px solid #1E293B;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-family: 'Courier New', monospace, sans-serif;
+      font-size: 11px;
+      text-align: left;
+      color: #94A3B8;
+      margin-bottom: 16px;
+      min-height: 56px;
+      line-height: 1.4;
+    }
+
+    .terminal-line { display: flex; align-items: center; gap: 6px; }
+    .terminal-line.success { color: var(--neon-green); }
+
+    .launch-abort-btn {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #94A3B8;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .launch-abort-btn:active {
+      border-color: var(--neon-magenta);
+      color: var(--neon-magenta);
+    }
+
+    /* BARRA INFERIOR HUD */
+    .bottom-hud {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(9, 14, 25, 0.94);
+      border-top: 1px solid #1E293B;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748B;
+    }
+
+    .bottom-hud-col { display: flex; align-items: center; gap: 10px; }
+    .clock-display {
+      color: var(--accent-main);
+      font-family: 'Courier New', monospace, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body class="theme-cyber">
+
+  <!-- HUD SUPERIOR -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <div class="nav-logo-box">🎮</div>
+      <div class="nav-titles">
+        <div class="nav-title">
+          RAIDER&nbsp;<span>GAMER CENTER</span>
+          <span class="nav-version-pill" id="navVersionPill">70 TITULOS</span>
+        </div>
+        <div class="nav-telemetry">
+          <span class="live-dot"></span>
+          <span class="hud-tag">60.0 FPS NATIVO</span>
+          <span class="hud-tag">AIR-GAPPED 100%</span>
+          <span class="hud-tag">0 INTERNET</span>
+        </div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="hud-btn btn-dice" onclick="launchRandomGame()" title="Juego Aleatorio Sorpresa">
+        <span>🎲</span>
+        <span>ALEATORIO</span>
+      </button>
+      <button class="hud-btn" onclick="openCloudStore()" title="Raider Cloud Store & Actualizaciones" style="border-color:var(--neon-green);color:var(--neon-green);">
+        <span>☁️</span>
+        <span>Actualizar</span>
+      </button>
+      <button id="sfxToggleBtn" class="hud-btn btn-sfx" onclick="toggleSFX()" title="Efectos de Sonido">
+        <span id="sfxIcon">🔊</span>
+        <span id="sfxLabel">SFX ON</span>
+      </button>
+      <a href="tema.html" class="hud-btn" onclick="playAudio('click')">🎨 Temas</a>
+      <a href="/cgi-bin/exit_gamer_center.cgi" onclick="exitApp(); return false;" ontouchend="exitApp(); return false;" class="hud-btn btn-exit">🏠 Salir</a>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="hub-container">
+
+    <!-- HERO BANNER DESTACADO -->
+    <div class="hero-banner" id="heroBanner">
+      <div class="hero-content">
+        <div class="hero-spot-label">★ JUEGO DESTACADO DEL DIA</div>
+        <div class="hero-title" id="heroTitle">Beach Buggy Racing</div>
+        <div class="hero-meta-row">
+          <span class="hero-tag" id="heroSystem">🏎️ Carreras 3D</span>
+          <span class="hero-tag perf">⚡ 60 FPS ULTRA SMOOTH</span>
+          <span class="hero-tag">🛡️ 100% OFFLINE</span>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-hero-launch" id="btnHeroLaunch" onclick="launchHeroGame()">
+            <span>DESPEGAR AHORA</span> &#9658;
+          </button>
+          <button class="btn-hero-next" onclick="cycleFeaturedGame()">
+            <span>🔄 Cambiar</span>
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-badge-circle" id="heroBadge">
+          <div class="hero-badge-halo"></div>
+          <span id="heroBadgeIcon">🏎️</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLES Y BUSCADOR -->
+    <div class="controls-row">
+      <div class="search-box">
+        <span class="search-icon-pos">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar juego por nombre, consola o genero..." oninput="handleSearch()">
+        <button id="searchClearBtn" class="search-clear-btn" onclick="clearSearch()">✕</button>
+      </div>
+      <div class="theme-picker-wrap" title="Personalizar Acento Cyber 2027">
+        <div class="theme-dot td-cyber active" onclick="setTheme('cyber', this)" title="Cian 2027"></div>
+        <div class="theme-dot td-hyper" onclick="setTheme('hyperdrive', this)" title="Crimson Beast"></div>
+        <div class="theme-dot td-matrix" onclick="setTheme('matrix', this)" title="Matrix Emerald"></div>
+        <div class="theme-dot td-retro" onclick="setTheme('retrowave', this)" title="Synthwave Retrowave"></div>
+      </div>
+    </div>
+
+    <!-- SELECTOR DE CONSOLAS Y CATEGORIAS -->
+    <div class="filter-scroll" id="filterBar">
+      <button class="filter-pill active" onclick="setFilter('all', this)">
+        <span>⭐ Todos</span>
+        <span class="pill-count" id="countAll">70</span>
+      </button>
+      <button class="filter-pill pill-fav" onclick="setFilter('favorites', this)">
+        <span>❤️ Favoritos</span>
+        <span class="pill-count" id="countFavs">0</span>
+      </button>
+      <button class="filter-pill" onclick="setFilter('pwa', this)">
+        <span>⚡ Kids Apps</span>
+        <span class="pill-count" id="countPwa">18</span>
+      </button>
+      <button class="filter-pill" onclick="openCloudStore()" style="border-color:var(--neon-green);color:var(--neon-green);background:rgba(0,255,157,0.08);">
+        <span>☁️ Nuevas Apps</span>
+        <span class="pill-count" style="background:var(--neon-green);color:#060911;">+</span>
+      </button>
+      <button class="filter-pill" onclick="setFilter('android', this)">
+        <span>📱 Android 3D</span>
+        <span class="pill-count" id="countAndroid">28</span>
+      </button>
+      <button class="filter-pill" onclick="setFilter('arcade', this)">
+        <span>🕹️ Arcade MAME</span>
+        <span class="pill-count" id="countArcade">24</span>
+      </button>
+    </div>
+
+    <!-- BARRA DE RESULTADOS -->
+    <div class="results-bar">
+      <div>Mostrando <span id="resultsCount" style="color:var(--accent-main);font-weight:900;">70</span> titulos optimizados</div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span>Ordenar:</span>
+        <select id="sortSelect" class="sort-select" onchange="handleSortChange()">
+          <option value="default">Recomendados</option>
+          <option value="name_asc">Nombre (A - Z)</option>
+          <option value="name_desc">Nombre (Z - A)</option>
+          <option value="cat">Por Consola / Sistema</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- GRILLA DE JUEGOS -->
+    <div class="games-grid" id="gameGrid"></div>
+
+  </div>
+
+  <!-- MODAL CLOUD STORE & ACTUALIZADOR -->
+  <div class="cloud-modal-overlay" id="cloudStoreModal">
+    <div class="cloud-modal-box">
+      <div class="cloud-modal-head">
+        <div class="cloud-modal-title">
+          <span>☁️</span>
+          <span>RAIDER CLOUD STORE &#8226; ACTUALIZADOR DE PWAS</span>
+          <span class="nav-version-pill" id="cloudStatusBadge">CANAL NUBE</span>
+        </div>
+        <button class="hud-btn" onclick="closeCloudStore()" style="background:#1E293B;border:none;font-size:13px;">✕ Cerrar</button>
+      </div>
+      <div class="cloud-modal-body">
+        
+        <!-- BARRA DE SERVIDOR / ORIGEN -->
+        <div class="cloud-repo-bar">
+          <span style="font-size:12px;font-weight:800;color:var(--text-muted);white-space:nowrap;">📡 Origen:</span>
+          <input type="text" id="cloudRepoInput" class="cloud-repo-input" value="http://127.0.0.1:8088/raider_catalog.json">
+          <button class="hud-btn" onclick="setCloudChannel('github')">🌐 GitHub Oficial</button>
+          <button class="hud-btn" onclick="setCloudChannel('local')">🏠 Servidor Local</button>
+          <button class="hud-btn" onclick="fetchCloudCatalog()" style="background:var(--neon-green);color:#060911;border:none;">🔄 Buscar Novedades</button>
+        </div>
+
+        <div id="cloudFeedback" style="display:none;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:800;margin-bottom:12px;"></div>
+
+        <!-- LISTA DE APPS DE LA NUBE -->
+        <div class="cloud-apps-grid" id="cloudAppsGrid"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERLAY DE DESPEGUE -->
+  <div class="launch-overlay" id="launchOverlay">
+    <div class="launch-box">
+      <div class="launch-hero-icon" id="modalIcon">🎮</div>
+      <div class="launch-game-title" id="modalTitle">Iniciando Juego</div>
+      <div class="launch-game-cat" id="modalCat">Cargando motor offline nativo...</div>
+      
+      <div class="launch-meter">
+        <div class="meter-bar" id="meterBar"></div>
+      </div>
+
+      <div class="launch-terminal" id="launchTerminal">
+        <div class="terminal-line success">✓ [0.1s] Optimizando aceleracion GPU Mali-400...</div>
+        <div class="terminal-line success">✓ [0.3s] Fijando V-Sync a 60 FPS nativo...</div>
+        <div class="terminal-line" id="termLine3">⌛ [0.5s] Bloqueando solicitudes de red... LISTO</div>
+      </div>
+
+      <button class="launch-abort-btn" onclick="abortLaunch()">✕ CANCELAR DESPEGUE</button>
+    </div>
+  </div>
+
+  <!-- BARRA INFERIOR HUD -->
+  <footer class="bottom-hud">
+    <div class="bottom-hud-col">
+      <span>RAIDER OS &#8226; SISTEMA KIOSK BLINDADO</span>
+      <span style="color:#334155;">&nbsp;|&nbsp;</span>
+      <span>100% OFFLINE &#8226; CERO INTERNET &#8226; 60 FPS NATIVO</span>
+    </div>
+    <div class="bottom-hud-col">
+      <span id="cyberClock" class="clock-display">00:00:00</span>
+      <span style="color:var(--neon-green);">● EN LINEA</span>
+    </div>
+  </footer>
+
+  <script>
+  function exitApp() {
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/cgi-bin/exit_gamer_center.cgi?t=' + Date.now(), true);
+    xhr.send();
+  } catch(e) {}
+  try {
+    var img = new Image();
+    img.src = '/cgi-bin/exit_gamer_center.cgi?t=' + Date.now();
+  } catch(e) {}
+  setTimeout(function() {
+    window.location.href = '/cgi-bin/exit_gamer_center.cgi';
+  }, 120);
+}
+
+    /* =========================================================
+       CATALOGO OFICIAL DE 70 TITULOS RAIDER OS 2027 (18 KIDS PWA + 28 ANDROID + 24 ARCADE)
+       ========================================================= */
+    var GAMES = [
+      {"tag":"Vocales & ABC","name":"Cartilla Kids","icon":"📖","sys":"pwa","url":"http://127.0.0.1:8088/cartilla_kids.html","cat":"pwa"},
+      {"tag":"Pre-Escritura","name":"Trazado Mágico","icon":"✍️","sys":"pwa","url":"http://127.0.0.1:8088/tracing_kids.html","cat":"pwa"},
+      {"tag":"Mega Mente","name":"Word Raider","icon":"👁️","sys":"pwa","url":"http://127.0.0.1:8088/word_raider.html","cat":"pwa"},
+      {"tag":"Razonamiento","name":"Lógica Kids","icon":"🧠","sys":"pwa","url":"http://127.0.0.1:8088/logica_kids.html","cat":"pwa"},
+      {"tag":"Calculo 2P","name":"Duelo Matemático","icon":"⚔️","sys":"pwa","url":"http://127.0.0.1:8088/math_duel.html","cat":"pwa"},
+      {"tag":"Tangram 2027","name":"Tangram Kids","icon":"🧩","sys":"pwa","url":"http://127.0.0.1:8088/tangram_kids.html","cat":"pwa"},
+      {"tag":"Supermercado","name":"La Tiendita","icon":"🛒","sys":"pwa","url":"http://127.0.0.1:8088/tiendita_kids.html","cat":"pwa"},
+      {"tag":"Fauna & Sombras","name":"Zoo Aventura","icon":"🦁","sys":"pwa","url":"http://127.0.0.1:8088/zoo_aventura.html","cat":"pwa"},
+      {"tag":"Fósiles & Museo","name":"Dino Mundo","icon":"🦖","sys":"pwa","url":"http://127.0.0.1:8088/dino_kids.html","cat":"pwa"},
+      {"tag":"Anatomía","name":"Mi Cuerpo Humano","icon":"🫀","sys":"pwa","url":"http://127.0.0.1:8088/cuerpo_humano.html","cat":"pwa"},
+      {"tag":"Chef Saludable","name":"Mini Chef","icon":"👨‍🍳","sys":"pwa","url":"http://127.0.0.1:8088/mini_chef.html","cat":"pwa"},
+      {"tag":"Oficios & Vial","name":"Héroes Ciudad","icon":"🚒","sys":"pwa","url":"http://127.0.0.1:8088/heroes_ciudad.html","cat":"pwa"},
+      {"tag":"Rutinas Niños","name":"Hábitos Mágicos","icon":"✨","sys":"pwa","url":"http://127.0.0.1:8088/habitos_magicos.html","cat":"pwa"},
+      {"tag":"Dibujo Neón","name":"Neon Paint","icon":"🎨","sys":"pwa","url":"http://127.0.0.1:8088/neon_paint.html","cat":"pwa"},
+      {"tag":"Aprende Hora","name":"Time Master","icon":"⏰","sys":"pwa","url":"http://127.0.0.1:8088/time_master.html","cat":"pwa"},
+      {"tag":"Duelo Trivia","name":"Raider Trivia","icon":"🪐","sys":"pwa","url":"http://127.0.0.1:8088/raider_trivia.html","cat":"pwa"},
+      {"tag":"Guía Oficial","name":"Guía Tablet","icon":"📘","sys":"pwa","url":"http://127.0.0.1:8088/manual_usuario.html","cat":"pwa"},
+      {"tag":"Personalizar","name":"Temas & Estilos","icon":"⚙️","sys":"pwa","url":"http://127.0.0.1:8088/tema.html","cat":"pwa"},
+      {"tag":"Arcade 1-Touch","name":"Flappy Bird","icon":"🐦","sys":"native","app":"com.dotgears.flappybird/com.dotgears.flappy.SplashScreen","cat":"android"},{"tag":"Salto Infinito","name":"Doodle Jump","icon":"🦘","sys":"native","app":"com.realarcade.DOJ/.MrGame","cat":"android"},{"tag":"Cartas y Naipes","name":"Solitario Klondike","icon":"🃏","sys":"native","app":"de.tobiasbielefeld.solitaire/.ui.GameSelector","cat":"android"},{"tag":"Puzle Bloques","name":"Block Puzzle","icon":"🧩","sys":"native","app":"de.mwvb.blockpuzzle/.StartScreenActivity","cat":"android"},{"tag":"Carreras 3D","name":"Beach Buggy Racing","icon":"🏁","sys":"native","app":"com.vectorunit.purple.googleplay/.Purple","cat":"android"},{"tag":"Autos 60FPS","name":"Traffic Racer","icon":"🚗","sys":"native","app":"com.skgames.trafficracer/com.prime31.UnityPlayerNativeActivity","cat":"android"},{"tag":"Carreras Nitro","name":"Asphalt Nitro","icon":"🏁","sys":"native","app":"com.gameloft.android.ANMP.GloftAGHM/.MainActivity","cat":"android"},{"tag":"Runner 3D","name":"Subway Surfers","icon":"🏃","sys":"native","app":"com.kiloo.subwaysurf/com.kiloo.unityutilities.UnityPluginActivity","cat":"android"},{"tag":"Beat \u0027em Up","name":"Dan The Man","icon":"👊","sys":"native","app":"com.halfbrick.dantheman/com.halfbrick.mortar.MortarGameLauncherActivity","cat":"android"},{"tag":"Ritmo Tactil","name":"Geometry Dash Lite","icon":"🔷","sys":"native","app":"com.robtopx.geometryjumplite/.GeometryDashLite","cat":"android"},{"tag":"Motos de Agua","name":"Riptide GP","icon":"🌊","sys":"native","app":"com.vectorunit.blue/com.inject.InjectActivity","cat":"android"},{"tag":"Motos de Agua","name":"Riptide GP2","icon":"🌊","sys":"native","app":"com.vectorunit.red/.Red","cat":"android"},{"tag":"Carreras Isla","name":"Beach Buggy Blitz","icon":"🌴","sys":"native","app":"com.vectorunit.yellow/.Yellow","cat":"android"},{"tag":"Fisica y Motor","name":"Hill Climb Racing","icon":"🚙","sys":"native","app":"com.fingersoft.hillclimb/com.fingersoft.game.MainActivity","cat":"android"},{"tag":"Lanchas 3D","name":"Shine Runner","icon":"🐊","sys":"native","app":"com.vectorunit.green/.Green","cat":"android"},{"tag":"Fisica Orbital","name":"Angry Birds Space","icon":"🚀","sys":"native","app":"com.rovio.angrybirdsspace.ads/com.rovio.fusion.App","cat":"android"},{"tag":"Ingenio Mecanico","name":"Bad Piggies HD","icon":"🐷","sys":"native","app":"com.rovio.BadPiggiesHD/com.rovio.BadPiggies.PluginManager","cat":"android"},{"tag":"Fisica de Agua","name":"Where is My Water?","icon":"💧","sys":"native","app":"com.disney.WMW/.WMWActivity","cat":"android"},{"tag":"Cristal 3D","name":"Smash Hit","icon":"🔮","sys":"native","app":"com.mediocre.smashhit/.Main","cat":"android"},{"tag":"Corte Samurai","name":"Fruit Ninja","icon":"🍉","sys":"native","app":"com.halfbrick.fruitninjafree/com.halfbrick.mortar.MortarGameActivity","cat":"android"},{"tag":"Puzle y Dulces","name":"Cut the Rope","icon":"🍬","sys":"native","app":"com.zeptolab.ctr.paid/com.zeptolab.ctr.CtrApp","cat":"android"},{"tag":"Joyas Match-3","name":"Bejeweled Classic","icon":"💎","sys":"native","app":"com.ea.gp.bej3/.Main","cat":"android"},{"tag":"Agilidad Mental","name":"2048 HD","icon":"🔢","sys":"native","app":"com.uberspot.a2048/.MainActivity","cat":"android"},{"tag":"Match-3 Clasico","name":"Candy Crush Saga","icon":"🍭","sys":"native","app":"com.king.candycrushsaga/.CandyCrushSagaActivity","cat":"android"},{"tag":"Soda Saga","name":"Candy Crush Soda","icon":"🍹","sys":"native","app":"com.king.candycrushsodasaga/.CandyCrushSodaSagaActivity","cat":"android"},{"tag":"Mascota Virtual","name":"Pou","icon":"🐾","sys":"native","app":"me.pou.app/.App","cat":"android"},{"tag":"Gato Interactivo","name":"Talking Tom 2","icon":"🐱","sys":"native","app":"com.outfit7.talkingtom2free/com.outfit7.talkingtom2.Main","cat":"android"},{"tag":"Saltos 3D","name":"Crossy Road","icon":"🐔","sys":"native","app":"com.yodo1.crossyroad/com.yodo1.sdkManager.yodo1Activity","cat":"android"},{"tag":"Arcade Aviones","name":"1942 (Capcom)","icon":"✈","sys":"arcade","cat":"arcade","rom":"1942.zip"},{"tag":"Arcade Beat \u0027em Up","name":"Captain Commando","icon":"👊","sys":"arcade","cat":"arcade","rom":"captcomm.zip"},{"tag":"Arcade Lucha","name":"Double Dragon","icon":"👊","sys":"arcade","cat":"arcade","rom":"ddragon.zip"},{"tag":"Arcade Beat \u0027em Up","name":"Cadillacs and Dinosaurs","icon":"🍖","sys":"arcade","cat":"arcade","rom":"dino.zip"},{"tag":"Arcade Clasico","name":"Donkey Kong","icon":"🍌","sys":"arcade","cat":"arcade","rom":"dkong.zip"},{"tag":"Arcade Retro","name":"Frogger","icon":"🐸","sys":"arcade","cat":"arcade","rom":"frogger.zip"},{"tag":"Arcade Espacial","name":"Galaga","icon":"🚀","sys":"arcade","cat":"arcade","rom":"galaga.zip"},{"tag":"Arcade Espacial","name":"Galaxian","icon":"👾","sys":"arcade","cat":"arcade","rom":"galaxian.zip"},{"tag":"Arcade Lucha","name":"Mortal Kombat","icon":"🐉","sys":"arcade","cat":"arcade","rom":"mk.zip"},{"tag":"Arcade NeoGeo","name":"Metal Slug 1","icon":"💣","sys":"arcade","cat":"arcade","rom":"mslug.zip"},{"tag":"Arcade NeoGeo","name":"Metal Slug 2","icon":"💥","sys":"arcade","cat":"arcade","rom":"mslug2.zip"},{"tag":"Arcade NeoGeo","name":"Metal Slug X","icon":"💣","sys":"arcade","cat":"arcade","rom":"mslugx.zip"},{"tag":"Arcade Carreras","name":"OutRun","icon":"🚗","sys":"arcade","cat":"arcade","rom":"outrun.zip"},{"tag":"Arcade Legendario","name":"Pac-Man","icon":"🍒","sys":"arcade","cat":"arcade","rom":"pacman.zip"},{"tag":"Arcade Globos","name":"Pang","icon":"🎈","sys":"arcade","cat":"arcade","rom":"pang.zip"},{"tag":"Arcade Clasico","name":"Puck Man","icon":"🍒","sys":"arcade","cat":"arcade","rom":"puckman.zip"},{"tag":"Arcade Accion","name":"RoboCop","icon":"🔫","sys":"arcade","cat":"arcade","rom":"robocop.zip"},{"tag":"Arcade Shooter","name":"Super Contra","icon":"💥","sys":"arcade","cat":"arcade","rom":"scontra.zip"},{"tag":"Arcade Capcom","name":"Street Fighter II","icon":"👊","sys":"arcade","cat":"arcade","rom":"sf2.zip"},{"tag":"Arcade Capcom","name":"Street Fighter II: Champion Edition","icon":"🏆","sys":"arcade","cat":"arcade","rom":"sf2ce.zip"},{"tag":"Arcade Plataformas","name":"Snow Bros","icon":"⛄","sys":"arcade","cat":"arcade","rom":"snowbros.zip"},{"tag":"Arcade Western","name":"Sunset Riders","icon":"⭐","sys":"arcade","cat":"arcade","rom":"ssriders.zip"},{"tag":"Arcade Puzle","name":"Tetris","icon":"🔲","sys":"arcade","cat":"arcade","rom":"tetris.zip"},{"tag":"Arcade Beat \u0027em Up","name":"TMNT Arcade","icon":"🐢","sys":"arcade","cat":"arcade","rom":"tmnt.zip"}];
+
+    // ESTADO
+    var currentFilter = 'all';
+    var currentSort = 'default';
+    var favorites = [];
+    var sfxEnabled = true;
+    var audioCtx = null;
+    var featuredIndex = 0;
+    var launchTimer = null;
+    var isLaunching = false;
+
+    // INICIALIZACION
+    try {
+      var savedFavs = localStorage.getItem('raider_fav_games');
+      if (savedFavs) { favorites = JSON.parse(savedFavs); }
+      var savedSfx = localStorage.getItem('raider_sfx_enabled');
+      if (savedSfx !== null) { sfxEnabled = (savedSfx === 'true'); }
+      var savedTheme = localStorage.getItem('raider_theme');
+      if (savedTheme) { document.body.className = 'theme-' + savedTheme; }
+    } catch(e) {}
+
+    // SINTETIZADOR DE AUDIO SCI-FI (WEB AUDIO API)
+    function initAudio() {
+      if (!audioCtx) {
+        try {
+          var AudioClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioClass) { audioCtx = new AudioClass(); }
+        } catch(e) {}
+      }
+    }
+
+    function playAudio(type) {
+      if (!sfxEnabled) return;
+      initAudio();
+      if (!audioCtx) return;
+      try {
+        var now = audioCtx.currentTime;
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, now);
+          osc.frequency.exponentialRampToValueAtTime(1320, now + 0.06);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.06);
+          osc.start(now);
+          osc.stop(now + 0.07);
+        } else if (type === 'tab') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(660, now + 0.08);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } else if (type === 'fav') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1046, now);
+          osc.frequency.setValueAtTime(1318, now + 0.06);
+          osc.frequency.setValueAtTime(1568, now + 0.12);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.23);
+        } else if (type === 'launch') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(160, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.5);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.linearRampToValueAtTime(0.2, now + 0.4);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
+          osc.start(now);
+          osc.stop(now + 0.65);
+        } else if (type === 'roulette') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(1200, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.04);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        }
+      } catch(e) {}
+    }
+
+    function toggleSFX() {
+      sfxEnabled = !sfxEnabled;
+      try { localStorage.setItem('raider_sfx_enabled', sfxEnabled ? 'true' : 'false'); } catch(e) {}
+      updateSFXUI();
+      if (sfxEnabled) playAudio('fav');
+    }
+
+    function updateSFXUI() {
+      var btn = document.getElementById('sfxToggleBtn');
+      var label = document.getElementById('sfxLabel');
+      var icon = document.getElementById('sfxIcon');
+      if (sfxEnabled) {
+        btn.className = 'hud-btn btn-sfx';
+        label.innerText = 'SFX ON';
+        icon.innerText = '\uD83D\uDD0A';
+      } else {
+        btn.className = 'hud-btn btn-sfx muted';
+        label.innerText = 'SFX OFF';
+        icon.innerText = '\uD83D\uDD07';
+      }
+    }
+
+    // TEMAS
+    function setTheme(name, dot) {
+      document.body.className = 'theme-' + name;
+      try { localStorage.setItem('raider_theme', name); } catch(e) {}
+      var dots = document.querySelectorAll('.theme-dot');
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(' active', '');
+      }
+      dot.className += ' active';
+      playAudio('click');
+    }
+
+    // RELOJ
+    function updateClock() {
+      var d = new Date();
+      var h = d.getHours();
+      var m = d.getMinutes();
+      var s = d.getSeconds();
+      h = (h < 10 ? '0' : '') + h;
+      m = (m < 10 ? '0' : '') + m;
+      s = (s < 10 ? '0' : '') + s;
+      document.getElementById('cyberClock').innerText = h + ':' + m + ':' + s;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // FAVORITOS
+    function isFavorite(name) {
+      for (var i = 0; i < favorites.length; i++) {
+        if (favorites[i] === name) return true;
+      }
+      return false;
+    }
+
+    function toggleFavorite(name, e) {
+      if (e && e.stopPropagation) e.stopPropagation();
+      var idx = -1;
+      for (var i = 0; i < favorites.length; i++) {
+        if (favorites[i] === name) { idx = i; break; }
+      }
+      if (idx !== -1) {
+        favorites.splice(idx, 1);
+        playAudio('click');
+      } else {
+        favorites.push(name);
+        playAudio('fav');
+      }
+      try { localStorage.setItem('raider_fav_games', JSON.stringify(favorites)); } catch(err) {}
+      updateCategoryCounts();
+      filterGames();
+    }
+
+    // CONTEOS DINAMICOS
+    function updateCategoryCounts() {
+      var counts = { all: GAMES.length, favorites: favorites.length, pwa: 0, android: 0, arcade: 0 };
+      for (var i = 0; i < GAMES.length; i++) {
+        var c = GAMES[i].cat;
+        if (counts[c] !== undefined) { counts[c]++; }
+      }
+      if (document.getElementById('countAll')) document.getElementById('countAll').innerText = counts.all;
+      if (document.getElementById('countFavs')) document.getElementById('countFavs').innerText = counts.favorites;
+      if (document.getElementById('countPwa')) document.getElementById('countPwa').innerText = counts.pwa;
+      if (document.getElementById('countAndroid')) document.getElementById('countAndroid').innerText = counts.android;
+      if (document.getElementById('countArcade')) document.getElementById('countArcade').innerText = counts.arcade;
+      var pill = document.getElementById('navVersionPill');
+      if (pill) { pill.innerText = counts.all + ' TITULOS'; }
+    }
+
+    // BANNER DESTACADO
+    var spotlightPicks = [0, 4, 5, 7, 8, 9, 26, 29, 34, 44];
+    var currentSpotIndex = 0;
+
+    function updateFeaturedBanner() {
+      var g = GAMES[spotlightPicks[currentSpotIndex]] || GAMES[0];
+      document.getElementById('heroTitle').innerText = g.name;
+      document.getElementById('heroSystem').innerText = g.icon + ' ' + g.tag;
+      document.getElementById('heroBadgeIcon').innerText = g.icon;
+    }
+
+    function cycleFeaturedGame() {
+      playAudio('click');
+      currentSpotIndex = (currentSpotIndex + 1) % spotlightPicks.length;
+      updateFeaturedBanner();
+    }
+
+    function launchHeroGame() {
+      var g = GAMES[spotlightPicks[currentSpotIndex]] || GAMES[0];
+      launchGame(g);
+    }
+
+    // RULETA ALEATORIA
+    function launchRandomGame() {
+      playAudio('click');
+      var pool = GAMES;
+      if (currentFilter === 'favorites' && favorites.length > 0) {
+        pool = [];
+        for (var i = 0; i < GAMES.length; i++) {
+          if (isFavorite(GAMES[i].name)) pool.push(GAMES[i]);
+        }
+      } else if (currentFilter !== 'all') {
+        pool = [];
+        for (var j = 0; j < GAMES.length; j++) {
+          if (GAMES[j].cat === currentFilter) pool.push(GAMES[j]);
+        }
+      }
+      if (!pool || pool.length === 0) pool = GAMES;
+
+      var count = 0;
+      var maxSteps = 10;
+      var interval = setInterval(function() {
+        var rIdx = Math.floor(Math.random() * pool.length);
+        var cand = pool[rIdx];
+        document.getElementById('modalTitle').innerText = cand.name;
+        document.getElementById('modalCat').innerText = 'Sorteando: ' + cand.tag;
+        document.getElementById('modalIcon').innerText = cand.icon;
+        playAudio('roulette');
+        count++;
+        if (count >= maxSteps) {
+          clearInterval(interval);
+          launchGame(cand);
+        }
+      }, 70);
+    }
+
+    // RENDERIZADOR DE GRILLA
+    function renderGames(list) {
+      var grid = document.getElementById('gameGrid');
+      var countLabel = document.getElementById('resultsCount');
+      grid.innerHTML = '';
+      countLabel.innerText = list.length;
+
+      if (!list || list.length === 0) {
+        grid.innerHTML = 
+          '<div style="width: 100%; text-align: center; padding: 60px 20px; color: #64748B; font-size: 15px; font-weight: 800;">' +
+            '<div style="font-size: 40px; margin-bottom: 10px;">\uD83D\uDD0D</div>' +
+            'No se encontraron juegos con este criterio.<br>' +
+            '<span style="font-size: 12px; color: #475569; margin-top: 6px; display: inline-block;">Prueba con otra palabra clave o selecciona "Todos".</span>' +
+          '</div>';
+        return;
+      }
+
+      for (var i = 0; i < list.length; i++) {
+        var g = list[i];
+        var col = document.createElement('div');
+        col.className = 'game-col';
+
+        var card = document.createElement('div');
+        card.className = 'game-card';
+        card.onclick = (function(game) {
+          return function() { launchGame(game); };
+        })(g);
+
+        var favClass = isFavorite(g.name) ? 'card-fav-btn is-fav' : 'card-fav-btn';
+        var favIcon = isFavorite(g.name) ? '\u2605' : '\u2606';
+
+        card.innerHTML = 
+          '<div class="' + favClass + '" onclick="toggleFavorite(\'' + g.name.replace(/'/g, "\\'") + '\', event)" title="Favorito">' +
+            favIcon +
+          '</div>' +
+          '<div class="card-header">' +
+            '<div class="card-emblem">' + g.icon + '</div>' +
+            '<div class="card-meta">' +
+              '<div class="card-name" title="' + g.name + '">' + g.name + '</div>' +
+              '<div class="card-badges-row">' +
+                '<span class="card-badge badge-' + g.cat + '">' + g.tag + '</span>' +
+                '<span class="fps-tag">60 FPS</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="btn-play-trigger">JUGAR AHORA \u25BA</div>';
+
+        col.appendChild(card);
+        grid.appendChild(col);
+      }
+    }
+
+    // FILTROS
+    function setFilter(cat, btn) {
+      playAudio('tab');
+      currentFilter = cat;
+      var pills = document.querySelectorAll('.filter-pill');
+      for (var i = 0; i < pills.length; i++) {
+        pills[i].className = pills[i].className.replace(' active', '');
+      }
+      btn.className += ' active';
+      filterGames();
+    }
+
+    function handleSearch() {
+      var q = document.getElementById('searchInput').value.trim();
+      var clearBtn = document.getElementById('searchClearBtn');
+      if (q.length > 0) {
+        clearBtn.className = 'search-clear-btn visible';
+      } else {
+        clearBtn.className = 'search-clear-btn';
+      }
+      filterGames();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchClearBtn').className = 'search-clear-btn';
+      playAudio('click');
+      filterGames();
+    }
+
+    function handleSortChange() {
+      currentSort = document.getElementById('sortSelect').value;
+      playAudio('click');
+      filterGames();
+    }
+
+    function filterGames() {
+      var q = document.getElementById('searchInput').value.toLowerCase().trim();
+      var filtered = [];
+
+      for (var i = 0; i < GAMES.length; i++) {
+        var g = GAMES[i];
+        var matchCat = false;
+
+        if (currentFilter === 'all') {
+          matchCat = true;
+        } else if (currentFilter === 'favorites') {
+          matchCat = isFavorite(g.name);
+        } else {
+          matchCat = (g.cat === currentFilter);
+        }
+
+        var matchQuery = (g.name.toLowerCase().indexOf(q) !== -1 || g.tag.toLowerCase().indexOf(q) !== -1);
+
+        if (matchCat && matchQuery) {
+          filtered.push(g);
+        }
+      }
+
+      if (currentSort === 'name_asc') {
+        filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      } else if (currentSort === 'name_desc') {
+        filtered.sort(function(a, b) { return b.name.localeCompare(a.name); });
+      } else if (currentSort === 'cat') {
+        filtered.sort(function(a, b) { return a.cat.localeCompare(b.cat); });
+      }
+
+      renderGames(filtered);
+    }
+
+    // SECUENCIA DE DESPEGUE
+    function launchGame(g) {
+      if (isLaunching) return;
+      if (g.sys === 'pwa' && g.url) {
+        playAudio('launch');
+        window.location.href = g.url;
+        return;
+      }
+      isLaunching = true;
+      playAudio('launch');
+
+      var overlay = document.getElementById('launchOverlay');
+      var mIcon = document.getElementById('modalIcon');
+      var mTitle = document.getElementById('modalTitle');
+      var mCat = document.getElementById('modalCat');
+      var bar = document.getElementById('meterBar');
+      var termLine3 = document.getElementById('termLine3');
+
+      mIcon.innerText = g.icon;
+      mTitle.innerText = g.name;
+      mCat.innerText = g.tag + ' \u2022 100% OFFLINE';
+      bar.style.width = '0%';
+      termLine3.className = 'terminal-line';
+      termLine3.innerText = '\u231B [0.5s] Bloqueando solicitudes de red... LISTO';
+
+      overlay.className = 'launch-overlay active';
+
+      setTimeout(function() {
+        bar.style.width = '100%';
+      }, 50);
+
+      setTimeout(function() {
+        termLine3.className = 'terminal-line success';
+        termLine3.innerText = '\u2713 [0.8s] Ejecutando motor en primer plano...';
+      }, 400);
+
+      // Despacho CGI al backend
+      var url = '/cgi-bin/launch_game.cgi?sys=' + encodeURIComponent(g.sys || 'native');
+      if (g.app) { url += '&app=' + encodeURIComponent(g.app); }
+      if (g.rom) { url += '&rom=' + encodeURIComponent(g.rom); }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.send();
+
+      launchTimer = setTimeout(function() {
+        overlay.className = 'launch-overlay';
+        isLaunching = false;
+      }, 1000);
+    }
+
+    function abortLaunch() {
+      if (launchTimer) clearTimeout(launchTimer);
+      var overlay = document.getElementById('launchOverlay');
+      overlay.className = 'launch-overlay';
+      isLaunching = false;
+      playAudio('click');
+    }
+
+    function exitGamerCenter() { exitApp(); }
+
+    /* =========================================================
+       RAIDER CLOUD STORE & PWA UPDATER 2027
+       ========================================================= */
+    var extraGames = [];
+    var cloudCatalog = [];
+
+    function initExtraGames() {
+      try {
+        var saved = localStorage.getItem('raider_extra_games');
+        if (saved) {
+          extraGames = JSON.parse(saved);
+          mergeExtraGames();
+        }
+      } catch(e) {}
+    }
+
+    function mergeExtraGames() {
+      if (!extraGames || extraGames.length === 0) return;
+      for (var i = 0; i < extraGames.length; i++) {
+        var eg = extraGames[i];
+        var exists = false;
+        for (var j = 0; j < GAMES.length; j++) {
+          if (GAMES[j].name === eg.name || GAMES[j].url === eg.url) {
+            exists = true;
+            break;
+          }
+        }
+        if (!exists) {
+          GAMES.unshift(eg);
+        }
+      }
+    }
+
+    function openCloudStore() {
+      playAudio('click');
+      var m = document.getElementById('cloudStoreModal');
+      if (m) {
+        m.className = 'cloud-modal-overlay active';
+        fetchCloudCatalog();
+      }
+    }
+
+    function closeCloudStore() {
+      playAudio('click');
+      var m = document.getElementById('cloudStoreModal');
+      if (m) { m.className = 'cloud-modal-overlay'; }
+    }
+
+    function setCloudChannel(ch) {
+      playAudio('click');
+      var inp = document.getElementById('cloudRepoInput');
+      if (ch === 'github') {
+        inp.value = 'https://raw.githubusercontent.com/Raiderxell/raider-apps/main/raider_catalog.json';
+      } else {
+        inp.value = 'http://127.0.0.1:8088/raider_catalog.json';
+      }
+      fetchCloudCatalog();
+    }
+
+    function showCloudFeedback(text, isError) {
+      var fb = document.getElementById('cloudFeedback');
+      if (!fb) return;
+      fb.style.display = 'block';
+      fb.style.background = isError ? 'rgba(239, 68, 68, 0.15)' : 'rgba(0, 255, 157, 0.15)';
+      fb.style.border = isError ? '1px solid #EF4444' : '1px solid #00FF9D';
+      fb.style.color = isError ? '#FCA5A5' : '#6EE7B7';
+      fb.innerText = text;
+    }
+
+    function isAppLocallyInstalled(file) {
+      var fullUrl = 'http://127.0.0.1:8088/' + file;
+      for (var i = 0; i < GAMES.length; i++) {
+        if (GAMES[i].url === fullUrl || GAMES[i].file === file) return true;
+      }
+      return false;
+    }
+
+    function fetchCloudCatalog() {
+      var inp = document.getElementById('cloudRepoInput');
+      var url = (inp && inp.value.trim()) ? inp.value.trim() : 'http://127.0.0.1:8088/raider_catalog.json';
+      var grid = document.getElementById('cloudAppsGrid');
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#94A3B8;font-size:14px;font-weight:700;">⌛ Consultando catálogo en la nube...</div>';
+      showCloudFeedback('Comprobando repositorio en ' + url + '...', false);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url + '?t=' + Date.now(), true);
+      xhr.timeout = 8000;
+      xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            cloudCatalog = JSON.parse(xhr.responseText);
+            showCloudFeedback('✓ Conectado. ' + cloudCatalog.length + ' aplicaciones disponibles en este canal.', false);
+            renderCloudCatalog(cloudCatalog);
+          } catch(e) {
+            showCloudFeedback('Error al procesar el formato del catálogo JSON.', true);
+          }
+        } else {
+          showCloudFeedback('No se pudo descargar el catálogo (HTTP ' + xhr.status + '). Conecta Wi-Fi o prueba Canal Local.', true);
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#EF4444;font-size:14px;font-weight:700;">⚠ Servidor no alcanzable. Conéctate a Wi-Fi o selecciona Servidor Local.</div>';
+        }
+      };
+      xhr.ontimeout = function() {
+        showCloudFeedback('Tiempo de espera agotado. Revisa tu conexión Wi-Fi.', true);
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#EF4444;">⚠ Tiempo agotado al conectar al canal.</div>';
+      };
+      xhr.onerror = function() {
+        showCloudFeedback('Error de red al conectar al canal. ¿Tablet sin Wi-Fi?', true);
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#EF4444;">⚠ Sin conexión a la nube.</div>';
+      };
+      xhr.send();
+    }
+
+    function renderCloudCatalog(apps) {
+      var grid = document.getElementById('cloudAppsGrid');
+      grid.innerHTML = '';
+      if (!apps || apps.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#64748B;">No hay aplicaciones en este canal.</div>';
+        return;
+      }
+      for (var i = 0; i < apps.length; i++) {
+        var app = apps[i];
+        var isInstalled = isAppLocallyInstalled(app.file);
+        var card = document.createElement('div');
+        card.className = 'cloud-app-card';
+
+        var btnText = isInstalled ? '✓ Instalado (Actualizar)' : '📥 DESCARGAR AHORA';
+        var btnClass = isInstalled ? 'btn-cloud-install installed' : 'btn-cloud-install';
+
+        card.innerHTML = 
+          '<div class="cloud-app-head">' +
+            '<div class="cloud-app-icon">' + app.icon + '</div>' +
+            '<div class="cloud-app-info">' +
+              '<div class="cloud-app-name">' + app.name + '</div>' +
+              '<div class="cloud-app-tag">' + app.tag + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cloud-app-desc">' + app.desc + '</div>' +
+          '<div class="cloud-app-meta">' +
+            '<span>Versión: ' + app.version + '</span>' +
+            '<span>Peso: ' + app.size + '</span>' +
+          '</div>' +
+          '<button class="' + btnClass + '" onclick="downloadPwaByIndex(' + i + ', this)">' +
+            btnText +
+          '</button>';
+
+        grid.appendChild(card);
+      }
+    }
+
+    function downloadPwaByIndex(idx, btn) {
+      var app = cloudCatalog[idx];
+      if (!app) return;
+      downloadAndInstallPWA(app, btn);
+    }
+
+    function downloadAndInstallPWA(app, btn) {
+      playAudio('click');
+      btn.className = 'btn-cloud-install loading';
+      btn.innerText = '⌛ Descargando PWA...';
+
+      var fetchUrl = app.url;
+      if (fetchUrl.indexOf('http') !== 0) {
+        fetchUrl = 'http://127.0.0.1:8088/' + fetchUrl;
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', fetchUrl + '?t=' + Date.now(), true);
+      xhr.timeout = 10000;
+      xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300 && xhr.responseText && xhr.responseText.length > 100) {
+          var htmlContent = xhr.responseText;
+          btn.innerText = '💾 Guardando en tablet...';
+
+          var postXhr = new XMLHttpRequest();
+          postXhr.open('POST', '/cgi-bin/install_pwa.cgi?action=install&file=' + encodeURIComponent(app.file), true);
+          postXhr.onload = function() {
+            if (postXhr.status >= 200 && postXhr.status < 300) {
+              btn.className = 'btn-cloud-install installed';
+              btn.innerText = '✓ ¡Instalado con Éxito!';
+              playAudio('fav');
+
+              var newGameEntry = {
+                tag: app.tag,
+                name: app.name,
+                icon: app.icon,
+                sys: 'pwa',
+                url: 'http://127.0.0.1:8088/' + app.file,
+                cat: 'pwa',
+                file: app.file
+              };
+
+              var idx = -1;
+              for (var k = 0; k < extraGames.length; k++) {
+                if (extraGames[k].name === app.name) { idx = k; break; }
+              }
+              if (idx >= 0) {
+                extraGames[idx] = newGameEntry;
+              } else {
+                extraGames.push(newGameEntry);
+              }
+
+              try {
+                localStorage.setItem('raider_extra_games', JSON.stringify(extraGames));
+              } catch(e) {}
+
+              try {
+                var metaXhr = new XMLHttpRequest();
+                metaXhr.open('POST', '/cgi-bin/install_pwa.cgi?action=save_extra_games', true);
+                metaXhr.send(JSON.stringify(extraGames));
+              } catch(e) {}
+
+              var gExists = false;
+              for (var g = 0; g < GAMES.length; g++) {
+                if (GAMES[g].name === newGameEntry.name) {
+                  gExists = true;
+                  GAMES[g] = newGameEntry;
+                  break;
+                }
+              }
+              if (!gExists) {
+                GAMES.unshift(newGameEntry);
+              }
+
+              updateCategoryCounts();
+              filterGames();
+              showCloudFeedback('✓ ¡' + app.name + ' instalado y listo para jugar en Gamer Center!', false);
+            } else {
+              btn.className = 'btn-cloud-install';
+              btn.innerText = '⚠ Error al guardar';
+              showCloudFeedback('Error guardando en el almacenamiento interno de la tablet.', true);
+            }
+          };
+          postXhr.onerror = function() {
+            btn.className = 'btn-cloud-install';
+            btn.innerText = '⚠ Error CGI';
+            showCloudFeedback('Error comunicando con el instalador interno CGI.', true);
+          };
+          postXhr.send(htmlContent);
+
+        } else {
+          btn.className = 'btn-cloud-install';
+          btn.innerText = '⚠ Error descarga';
+          showCloudFeedback('No se pudo descargar el archivo de ' + fetchUrl, true);
+        }
+      };
+      xhr.onerror = function() {
+        btn.className = 'btn-cloud-install';
+        btn.innerText = '⚠ Error de red';
+        showCloudFeedback('Error de red al descargar el paquete PWA.', true);
+      };
+      xhr.send();
+    }
+
+    // CARGA INICIAL
+    initExtraGames();
+    updateCategoryCounts();
+    updateFeaturedBanner();
+    updateSFXUI();
+    renderGames(GAMES);
+
+    // CAPTURA DEL BOTON ATRAS FISICO DE ANDROID
+    try {
+      history.pushState({ page: 'gamer_center' }, 'Gamer Center', '');
+      window.addEventListener('popstate', function(event) {
+        exitGamerCenter();
+      });
+    } catch(e) {}
+  </script>
+</body>
+</html>

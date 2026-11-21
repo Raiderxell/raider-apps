@@ -1,0 +1,24 @@
+[
+  {
+    "id": "cosmos_kids",
+    "name": "Cosmos Explorer",
+    "icon": "🪐",
+    "tag": "Sistema Solar",
+    "file": "cosmos_kids.html",
+    "version": "1.0",
+    "size": "21 KB",
+    "desc": "Explorador interactivo del Sol, Luna y 8 planetas con datos ilustrados y órbitas 2D.",
+    "url": "https://raw.githubusercontent.com/Raiderxell/raider-apps/main/cosmos_kids.html"
+  },
+  {
+    "id": "piano_kids",
+    "name": "Piano Neón Kids",
+    "icon": "🎹",
+    "tag": "Música & Melodías",
+    "file": "piano_kids.html",
+    "version": "1.0",
+    "size": "22 KB",
+    "desc": "Teclado musical táctil con modo 'Sigue la Luz' y 4 canciones infantiles guiadas a 60 FPS.",
+    "url": "https://raw.githubusercontent.com/Raiderxell/raider-apps/main/piano_kids.html"
+  }
+]
