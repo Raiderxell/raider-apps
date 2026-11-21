@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#070B14">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Puzzle Deslizante 2027 &#8226; Raider OS</title>
+  <style>
+    :root {
+      --bg-core: #070B14;
+      --bg-surface: #0E1626;
+      --accent: #00F0FF;
+      --neon-green: #10B981;
+      --neon-amber: #F59E0B;
+      --text: #F8FAFC;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: var(--bg-core);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* TOP BAR */
+    .top-bar {
+      background: var(--bg-surface);
+      border-bottom: 2px solid #1E293B;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .hud-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hud-btn {
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #F8FAFC;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .hud-btn:active { transform: scale(0.95); }
+    .btn-exit {
+      background: #182234;
+      border-color: #00F0FF;
+      color: #00F0FF;
+    }
+    .hud-btn.active {
+      background: rgba(0, 240, 255, 0.2);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: #0B1120;
+      border-bottom: 1px solid #1E293B;
+      padding: 6px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #94A3B8;
+    }
+    .stat-val {
+      color: var(--neon-amber);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    /* GAME BOARD CONTAINER */
+    .game-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #111C33 0%, #070B14 85%);
+      padding: 10px;
+    }
+
+    .board {
+      position: relative;
+      background: #020617;
+      border: 3px solid #1E293B;
+      border-radius: 16px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.8), 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+
+    .tile {
+      position: absolute;
+      background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+      border: 2px solid #334155;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #FFFFFF;
+      cursor: pointer;
+      box-shadow: inset 0 2px 0 rgba(255,255,255,0.15), 0 4px 8px rgba(0,0,0,0.4);
+      transition: left 0.12s ease-out, top 0.12s ease-out, transform 0.08s ease;
+    }
+    .tile:active {
+      transform: scale(0.96);
+      border-color: var(--accent);
+    }
+    .tile.correct {
+      border-color: var(--neon-green);
+      background: linear-gradient(135deg, #064E3B 0%, #022C22 100%);
+      color: #A7F3D0;
+    }
+
+    /* VICTORIA */
+    .win-modal {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 7, 14, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 200;
+    }
+    .win-modal.active { display: flex; }
+    .win-box {
+      background: #0B132B;
+      border: 2px solid var(--neon-green);
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+      border-radius: 20px;
+      padding: 30px 40px;
+      text-align: center;
+      max-width: 440px;
+    }
+    .win-icon { font-size: 56px; margin-bottom: 10px; }
+    .win-title { font-size: 24px; font-weight: 900; color: #FFFFFF; margin-bottom: 8px; }
+    .win-desc { font-size: 14px; color: #94A3B8; margin-bottom: 20px; }
+
+    /* HUD INFERIOR */
+    .hud-foot {
+      background: var(--bg-surface);
+      border-top: 1px solid #1E293B;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #64748B;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand">
+      <span style="font-size:22px;">🧩</span>
+      <span>PUZZLE DESLIZANTE</span>
+    </div>
+    <div class="hud-controls">
+      <button id="btnMode3" class="hud-btn" onclick="setGridSize(3)">3x3 (Fácil)</button>
+      <button id="btnMode4" class="hud-btn active" onclick="setGridSize(4)">4x4 (15-Puzzle)</button>
+      <button class="hud-btn" onclick="shuffleGame()" style="background:var(--neon-amber);color:#030712;border:none;">🔄 Mezclar</button>
+      <a href="/cgi-bin/exit_gamer_center.cgi" onclick="exitApp(); return false;" ontouchend="exitApp(); return false;" class="hud-btn btn-exit">🏠 Salir</a>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-chip">
+      <span>Movimientos:</span>
+      <span class="stat-val" id="moveCount">0</span>
+    </div>
+    <div class="stat-chip">
+      <span>Tiempo:</span>
+      <span class="stat-val" id="timeCount">00:00</span>
+    </div>
+    <div class="stat-chip">
+      <button class="hud-btn" onclick="toggleThemeTiles()" id="btnThemeTiles">🔢 Modo Números</button>
+    </div>
+  </div>
+
+  <!-- GAME BOARD -->
+  <main class="game-stage">
+    <div class="board" id="board"></div>
+  </main>
+
+  <!-- WIN MODAL -->
+  <div class="win-modal" id="winModal">
+    <div class="win-box">
+      <div class="win-icon">🎉</div>
+      <div class="win-title">¡LO LOGRASTE!</div>
+      <div class="win-desc" id="winText">Completaste el rompecabezas con éxito.</div>
+      <button class="hud-btn" onclick="shuffleGame()" style="background:var(--neon-green);color:#022C22;font-size:14px;padding:10px 24px;border:none;margin:0 auto;display:inline-flex;">
+        ▶ Jugar Otra Vez
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="hud-foot">
+    <span>RAIDER OS &#8226; AGILIDAD MENTAL 2027</span>
+    <span>100% OFFLINE &#8226; 60 FPS GPU MALI-400</span>
+  </footer>
+
+  <script>
+    // SALIDA CUADRUPLE CAPA
+    function exitApp() {
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/cgi-bin/exit_gamer_center.cgi?t=' + Date.now(), true);
+        xhr.send();
+      } catch(e) {}
+      try {
+        var img = new Image();
+        img.src = '/cgi-bin/exit_gamer_center.cgi?t=' + Date.now();
+      } catch(e) {}
+      setTimeout(function() {
+        window.location.href = '/cgi-bin/exit_gamer_center.cgi';
+      }, 120);
+    }
+
+    // WEB AUDIO API PROCEDURAL
+    var audioCtx = null;
+    function playAudio(type) {
+      try {
+        if (!audioCtx) {
+          var AudioClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioClass) audioCtx = new AudioClass();
+        }
+        if (!audioCtx) return;
+        var now = audioCtx.currentTime;
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'slide') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.exponentialRampToValueAtTime(800, now + 0.06);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.06);
+          osc.start(now);
+          osc.stop(now + 0.07);
+        } else if (type === 'win') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.1);
+          osc.frequency.setValueAtTime(783.99, now + 0.2);
+          osc.frequency.setValueAtTime(1046.50, now + 0.3);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
+          osc.start(now);
+          osc.stop(now + 0.65);
+        }
+      } catch(e) {}
+    }
+
+    // ESTADO DEL PUZZLE
+    var size = 4; // 3 o 4
+    var tiles = [];
+    var moves = 0;
+    var timerInterval = null;
+    var seconds = 0;
+    var isThemeEmoji = false;
+    var EMOJIS = ["🦁","🐯","🐼","🐨","🦊","🐰","🐵","🐶","🐸","🦄","🐷","🐮","🐧","🦉","🐙"];
+
+    var boardEl = document.getElementById('board');
+    var boardPx = 380; // Tamaño fijo en px para pantalla tablet
+    var tileSize = 0;
+
+    function setGridSize(n) {
+      size = n;
+      document.getElementById('btnMode3').className = (size === 3) ? 'hud-btn active' : 'hud-btn';
+      document.getElementById('btnMode4').className = (size === 4) ? 'hud-btn active' : 'hud-btn';
+      initGame();
+    }
+
+    function toggleThemeTiles() {
+      isThemeEmoji = !isThemeEmoji;
+      document.getElementById('btnThemeTiles').innerText = isThemeEmoji ? '🐾 Modo Animales' : '🔢 Modo Números';
+      renderTiles();
+    }
+
+    function initGame() {
+      document.getElementById('winModal').className = 'win-modal';
+      boardEl.style.width = boardPx + 'px';
+      boardEl.style.height = boardPx + 'px';
+      tileSize = Math.floor(boardPx / size);
+
+      tiles = [];
+      var total = size * size;
+      for (var i = 1; i < total; i++) {
+        tiles.push(i);
+      }
+      tiles.push(0); // 0 es el espacio vacío
+
+      moves = 0;
+      seconds = 0;
+      document.getElementById('moveCount').innerText = moves;
+      document.getElementById('timeCount').innerText = "00:00";
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+
+      shuffle(tiles);
+      renderTiles();
+    }
+
+    function updateTimer() {
+      seconds++;
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      document.getElementById('timeCount').innerText = 
+        (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+    }
+
+    function shuffle(arr) {
+      // Barajado garantizado válido
+      var blankIdx = arr.length - 1;
+      for (var step = 0; step < 120; step++) {
+        var neighbors = getNeighbors(blankIdx);
+        var r = neighbors[Math.floor(Math.random() * neighbors.length)];
+        arr[blankIdx] = arr[r];
+        arr[r] = 0;
+        blankIdx = r;
+      }
+    }
+
+    function getNeighbors(idx) {
+      var n = [];
+      var r = Math.floor(idx / size);
+      var c = idx % size;
+      if (r > 0) n.push(idx - size);
+      if (r < size - 1) n.push(idx + size);
+      if (c > 0) n.push(idx - 1);
+      if (c < size - 1) n.push(idx + 1);
+      return n;
+    }
+
+    function renderTiles() {
+      boardEl.innerHTML = '';
+      var gap = 4;
+      var actualTilePx = tileSize - (gap * 2);
+
+      for (var idx = 0; idx < tiles.length; idx++) {
+        var val = tiles[idx];
+        if (val === 0) continue; // Hueco vacío
+
+        var r = Math.floor(idx / size);
+        var c = idx % size;
+
+        var el = document.createElement('div');
+        el.className = 'tile';
+        if (val === idx + 1) {
+          el.className += ' correct';
+        }
+        el.style.width = actualTilePx + 'px';
+        el.style.height = actualTilePx + 'px';
+        el.style.left = (c * tileSize + gap) + 'px';
+        el.style.top = (r * tileSize + gap) + 'px';
+        el.style.fontSize = isThemeEmoji ? (size === 3 ? '38px' : '30px') : (size === 3 ? '32px' : '26px');
+
+        if (isThemeEmoji) {
+          el.innerText = EMOJIS[val - 1] || val;
+        } else {
+          el.innerText = val;
+        }
+
+        (function(tileIndex) {
+          el.onclick = function() { moveTile(tileIndex); };
+        })(idx);
+
+        boardEl.appendChild(el);
+      }
+    }
+
+    function moveTile(idx) {
+      var blankIdx = tiles.indexOf(0);
+      var neighbors = getNeighbors(blankIdx);
+      if (neighbors.indexOf(idx) !== -1) {
+        // Movimiento válido
+        tiles[blankIdx] = tiles[idx];
+        tiles[idx] = 0;
+        moves++;
+        document.getElementById('moveCount').innerText = moves;
+        playAudio('slide');
+        renderTiles();
+        checkWin();
+      }
+    }
+
+    function checkWin() {
+      for (var i = 0; i < tiles.length - 1; i++) {
+        if (tiles[i] !== i + 1) return;
+      }
+      // Ganó
+      if (timerInterval) clearInterval(timerInterval);
+      playAudio('win');
+      document.getElementById('winText').innerText = 
+        '¡Completado en ' + moves + ' movimientos y ' + document.getElementById('timeCount').innerText + '!';
+      document.getElementById('winModal').className = 'win-modal active';
+    }
+
+    function shuffleGame() {
+      initGame();
+    }
+
+    // INICIO
+    initGame();
+  </script>
+</body>
+</html>
+
