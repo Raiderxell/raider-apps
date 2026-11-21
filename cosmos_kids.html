@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#030712">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Cosmos Explorer 2027 &#8226; Raider OS</title>
+  <style>
+    :root {
+      --bg: #030712;
+      --card-bg: #0F172A;
+      --accent: #38BDF8;
+      --neon-gold: #FACC15;
+      --text: #F8FAFC;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* TOP BAR */
+    .top-bar {
+      background: #0B1120;
+      border-bottom: 2px solid #1E293B;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .hud-btn {
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #F8FAFC;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .hud-btn:active { transform: scale(0.95); }
+    .btn-exit {
+      background: #182234;
+      border-color: #38BDF8;
+      color: #38BDF8;
+    }
+
+    /* STAGE DEL COSMOS */
+    .cosmos-stage {
+      flex: 1;
+      display: flex;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #0F172A 0%, #030712 100%);
+      overflow: hidden;
+    }
+    .planets-scroll {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 20px 40px;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .planet-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid #1E293B;
+      border-radius: 18px;
+      width: 200px;
+      min-width: 200px;
+      height: 75%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+    .planet-card:active, .planet-card.active {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+    }
+    .planet-icon {
+      font-size: 64px;
+      margin-top: 10px;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+    }
+    .planet-name {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+    }
+    .planet-type {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--neon-gold);
+      text-transform: uppercase;
+    }
+    .btn-explore {
+      background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+      color: #030712;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      width: 100%;
+    }
+
+    /* MODAL DE INFORMACIÓN */
+    .info-modal {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(3, 7, 18, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 200;
+    }
+    .info-modal.active { display: flex; }
+    .info-box {
+      background: #0B132B;
+      border: 2px solid var(--accent);
+      border-radius: 18px;
+      max-width: 600px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
+    }
+    .info-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #1E293B;
+      padding-bottom: 12px;
+    }
+    .info-icon { font-size: 54px; }
+    .info-title { font-size: 24px; font-weight: 900; }
+    .info-subtitle { font-size: 12px; font-weight: 800; color: var(--neon-gold); }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .info-stat {
+      background: #070B16;
+      border: 1px solid #1E293B;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    .stat-label { font-size: 10px; color: #94A3B8; font-weight: 700; }
+    .stat-val { font-size: 13px; color: #FFFFFF; font-weight: 900; }
+    .info-fact {
+      font-size: 13px;
+      color: #E2E8F0;
+      line-height: 1.4;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* FOOTER */
+    .hud-foot {
+      background: #0B1120;
+      border-top: 1px solid #1E293B;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #64748B;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand">
+      <span>🪐</span>
+      <span>COSMOS EXPLORER 2027</span>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="hud-btn" onclick="startQuiz()">⭐ Desafío Cósmico</button>
+      <a href="/cgi-bin/exit_gamer_center.cgi" onclick="exitApp(); return false;" ontouchend="exitApp(); return false;" class="hud-btn btn-exit">🏠 Salir</a>
+    </div>
+  </header>
+
+  <!-- STAGE -->
+  <main class="cosmos-stage">
+    <div class="planets-scroll" id="planetsContainer">
+      <!-- Generado dinámicamente -->
+    </div>
+  </main>
+
+  <!-- MODAL DE DATOS -->
+  <div class="info-modal" id="infoModal">
+    <div class="info-box">
+      <div class="info-head">
+        <div class="info-icon" id="modalIcon">☀️</div>
+        <div>
+          <div class="info-title" id="modalName">El Sol</div>
+          <div class="info-subtitle" id="modalType">Estrella Central</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-stat">
+          <div class="stat-label">Distancia al Sol</div>
+          <div class="stat-val" id="statDist">0 km (Centro)</div>
+        </div>
+        <div class="info-stat">
+          <div class="stat-label">Temperatura Media</div>
+          <div class="stat-val" id="statTemp">5.500 °C</div>
+        </div>
+        <div class="info-stat">
+          <div class="stat-label">Lunas / Satélites</div>
+          <div class="stat-val" id="statMoons">8 Planetas</div>
+        </div>
+        <div class="info-stat">
+          <div class="stat-label">Duración del Día</div>
+          <div class="stat-val" id="statDay">27 Días terrestres</div>
+        </div>
+      </div>
+      <div class="info-fact" id="modalFact">
+        El Sol contiene el 99.8% de toda la masa del Sistema Solar y nos da luz y calor.
+      </div>
+      <button class="hud-btn" onclick="closeModal()" style="width:100%;justify-content:center;background:var(--accent);color:#030712;border:none;">
+        ✕ Cerrar y Seguir Explorando
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="hud-foot">
+    <span>RAIDER OS &#8226; CIENCIAS Y ASTRONOMÍA</span>
+    <span>100% OFFLINE &#8226; 60 FPS NATIVO</span>
+  </footer>
+
+  <script>
+    // SALIDA CUADRUPLE CAPA
+    function exitApp() {
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/cgi-bin/exit_gamer_center.cgi?t=' + Date.now(), true);
+        xhr.send();
+      } catch(e) {}
+      try {
+        var img = new Image();
+        img.src = '/cgi-bin/exit_gamer_center.cgi?t=' + Date.now();
+      } catch(e) {}
+      setTimeout(function() {
+        window.location.href = '/cgi-bin/exit_gamer_center.cgi';
+      }, 120);
+    }
+
+    var PLANETS = [
+      { name: "El Sol", icon: "☀️", type: "Estrella Amarilla", dist: "0 km (Centro)", temp: "5.500 °C", moons: "8 Planetas", day: "27 Días", fact: "El Sol es una estrella gigante: ¡dentro de él cabrían más de 1 millón de planetas Tierra!" },
+      { name: "Mercurio", icon: "🌑", type: "Planeta Rocoso", dist: "58 Millones km", temp: "167 °C", moons: "0 Lunas", day: "59 Días", fact: "Es el planeta más cercano al Sol y el más pequeño del Sistema Solar." },
+      { name: "Venus", icon: "🌕", type: "Planeta Rocoso", dist: "108 Millones km", temp: "464 °C (El más caliente)", moons: "0 Lunas", day: "243 Días", fact: "Gira al revés que los demás planetas y su atmósfera atrapa tanto calor que derrite plomo." },
+      { name: "La Tierra", icon: "🌍", type: "Planeta Océano", dist: "150 Millones km", temp: "15 °C", moons: "1 Luna", day: "24 Horas", fact: "¡Nuestro hogar! Es el único planeta conocido en todo el universo que alberga vida y agua líquida." },
+      { name: "Marte", icon: "🔴", type: "El Planeta Rojo", dist: "228 Millones km", temp: "-65 °C", moons: "2 Lunas", day: "24.6 Horas", fact: "Tiene el volcán más colosal del Sistema Solar: el Monte Olimpo, ¡3 veces más alto que el Everest!" },
+      { name: "Júpiter", icon: "🪐", type: "Gigante Gaseoso", dist: "778 Millones km", temp: "-110 °C", moons: "95 Lunas", day: "10 Horas", fact: "Es el rey de los planetas. Su Gran Mancha Roja es una tormenta gigante más grande que la Tierra entera." },
+      { name: "Saturno", icon: "🪐", type: "Gigante de Anillos", dist: "1.429 Millones km", temp: "-140 °C", moons: "146 Lunas", day: "10.7 Horas", fact: "Famoso por sus majestuosos anillos de hielo y polvo. Es tan liviano que flotaría si hubiera una bañera gigante." },
+      { name: "Urano", icon: "🔷", type: "Gigante de Hielo", dist: "2.871 Millones km", temp: "-195 °C", moons: "28 Lunas", day: "17 Horas", fact: "Gira completamente acostado sobre su órbita y tiene un hermoso color azul verdoso por el gas metano." },
+      { name: "Neptuno", icon: "🔵", type: "El Planeta Viento", dist: "4.498 Millones km", temp: "-200 °C", moons: "16 Lunas", day: "16 Horas", fact: "El planeta más lejano. Tiene los vientos supersónicos más veloces del cosmos, a más de 2.000 km/h." }
+    ];
+
+    function renderPlanets() {
+      var container = document.getElementById('planetsContainer');
+      container.innerHTML = '';
+      for (var i = 0; i < PLANETS.length; i++) {
+        var p = PLANETS[i];
+        var card = document.createElement('div');
+        card.className = 'planet-card';
+        card.innerHTML = 
+          '<div class="planet-type">' + p.type + '</div>' +
+          '<div class="planet-icon">' + p.icon + '</div>' +
+          '<div class="planet-name">' + p.name + '</div>' +
+          '<button class="btn-explore">EXPLORAR ►</button>';
+
+        (function(target) {
+          card.onclick = function() { showPlanetInfo(target); };
+        })(p);
+
+        container.appendChild(card);
+      }
+    }
+
+    function showPlanetInfo(p) {
+      document.getElementById('modalIcon').innerText = p.icon;
+      document.getElementById('modalName').innerText = p.name;
+      document.getElementById('modalType').innerText = p.type;
+      document.getElementById('statDist').innerText = p.dist;
+      document.getElementById('statTemp').innerText = p.temp;
+      document.getElementById('statMoons').innerText = p.moons;
+      document.getElementById('statDay').innerText = p.day;
+      document.getElementById('modalFact').innerText = p.fact;
+      document.getElementById('infoModal').className = 'info-modal active';
+    }
+
+    function closeModal() {
+      document.getElementById('infoModal').className = 'info-modal';
+    }
+
+    function startQuiz() {
+      var rand = PLANETS[Math.floor(Math.random() * PLANETS.length)];
+      var ans = prompt("⭐ Desafío Cósmico: ¿Cuál es el planeta o astro con este dato?: '" + rand.fact + "'");
+      if (ans && ans.toLowerCase().trim() === rand.name.toLowerCase().trim()) {
+        alert("🎉 ¡EXCELENTE! ¡Adivinaste correctamente: " + rand.name + "! 🌟");
+      } else if (ans) {
+        alert("Cerca... La respuesta correcta era: " + rand.name);
+      }
+    }
+
+    renderPlanets();
+  </script>
+</body>
+</html>
